@@ -34,19 +34,124 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col md-4 col-sm-4">
-                            <p>Server side:</p>
+                        <div class="col md-12 col-sm-12">
                             <ul>
-                                <li>Node.js</li>
-                            </ul>
-                            <p>Client side:</p>
-                            <ul>
-                                <li><a href="https://webpack.github.io/docs/commonjs.html" target="_blank">Webpack</a></li>
-                                <li><a href="http://browserify.org/" target="_blank">Browserify</a></li>
+                                <li>Es un formato donde cada módulo es ejecutado en su propio namespace.</li>
+                                <li>Es síncrono</li>
                             </ul>
                         </div>
-                        <div class="col md-8 col-sm-8">
-                            <code></code>
+                    </div>
+                    <div class="row">
+                        <div class="col md-6 col-sm-6">
+                            <h3>ECMAScript 5</h3>
+                            <code>// es5/module.js
+module.exports = function( value ){
+    return value*2;
+}</code>
+                            <hr>
+                            <code>// es5/main.js
+var multiplyBy2 = require('./module');
+
+var result = multiplyBy2( 4 );
+console.log(result);</code>
+                        </div>
+                        <div class="col md-6 col-sm-6">
+                            <h3>ECMAScript 6</h3>
+                            <code>// es6/module.js
+export default function( value ){
+    return value*2;
+}</code>
+                            <hr>
+                            <code>// es6/main.js
+import multiplyBy2 from './module';
+
+const result = multiplyBy2( 4 );
+console.log( result );</code>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Server side:</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col md-12 col-sm-12">
+                                    <ul>
+                                        <li><a href="https://nodejs.org" target="_blank">Node.js</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col md-6 col-sm-6">
+                                    <p><b>Ejecutar código:</b></p>
+                                    <code>node src/es5/main.js</code>
+                                    <p><b>Salida:</b></p>
+                                    <code>ECMAScript 5: 8</code>
+                                </div>
+                                <div class="col md-4 col-sm-4">
+                                    <p><b>Ejecutar código:</b></p>
+                                    <code>node src/es6/main.js</code>
+                                    <p><b>Salida:</b></p>
+                                    <code>src\es6\main.js:2
+import multiplyBy2 from './module';
+^^^^^^
+SyntaxError: Unexpected token import
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:542:28)
+    at Object.Module._extensions..js (module.js:579:10)
+    at Module.load (module.js:487:32)
+    at tryModuleLoad (module.js:446:12)
+    at Function.Module._load (module.js:438:3)
+    at Module.runMain (module.js:604:10)
+    at run (bootstrap_node.js:389:7)
+    at startup (bootstrap_node.js:149:9)</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Client side:</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col md-6 col-sm-6">
+                                    <ul>
+                                        <li><a href="http://browserify.org/" target="_blank">Browserify</a></li>
+                                    </ul>
+                                    <p><b>Instalación</b></p>
+                                    <code>npm install -g browserify</code>
+                                    <p><b>Generar bundle</b></p>
+                                    <code>browserify src/es5/main.js > assets/js/commonjs/bundle-browserify.js</code>
+                                </div>
+                                <div class="col md-6 col-sm-6">
+                                    <ul>
+                                        <li><a href="https://webpack.js.org/" target="_blank">Webpack 2</a></li>
+                                    </ul>
+                                    <p><b>Instalación</b></p>
+                                    <code>npm install -g webpack</code>
+                                    <p><b>Configuración:</b></p>
+                                    <code>// webpack.config.js
+module.exports = {
+    entry: './src/es6/main.js',
+    output: {
+        filename: 'assets/js/commonjs/bundle-webpack.js'
+    }
+}</code>
+                                    <p><b>Generar bundle:</b></p>
+                                    <code>webpack</code>
+                                    <p><b>Salida</b></p>
+                                    <code>Hash: 36c9c9154e83f68d9037
+Version: webpack 2.6.1
+Time: 91ms
+                               Asset     Size  Chunks             Chunk Names
+assets/js/commonjs/bundle-webpack.js  3.23 kB       0  [emitted]  main
+   [0] ./src/es6/module.js 77 bytes {0} [built]
+   [1] ./src/es6/main.js 125 bytes {0} [built]</code>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -56,6 +161,13 @@
                     <h3 class="panel-title"><a href="" title="AMD: Asynchronous Module Definition">AMD: Asynchronous Module Definition</a></h3>
                 </div>
                 <div class="panel-body">
+                    <div class="row">
+                        <div class="col md-12 col-sm-12">
+                            <ul>
+                                <li>Es Asíncrono</li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col md-4 col-sm-4">
                         </div>
@@ -83,7 +195,7 @@
             </div>
         </div>
 
-        <script src="assets/js/commonjs.js"></script>
-        <script src="assets/js/amd.js"></script>
+        <script src="assets/js/commonjs/bundle-webpack.js"></script>
+        <script src="assets/js/commonjs/bundle-browserify.js"></script>
     </body>
 </html>
