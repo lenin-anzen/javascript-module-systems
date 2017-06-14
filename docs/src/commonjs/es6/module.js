@@ -1,4 +1,4 @@
-// src/es6/module.js
+// src/commonjs/es6/module.js
 export default function( value ){
     return value*2;
 }

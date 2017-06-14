@@ -1,4 +1,4 @@
-// src/es5/module.js
+// src/commonjs/es5/module.js
 module.exports = function( value ){
     return value*2;
 }

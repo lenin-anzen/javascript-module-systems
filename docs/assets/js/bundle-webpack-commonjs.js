@@ -71,7 +71,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// es6/module.js
+// src/commonjs/es6/module.js
 /* harmony default export */ __webpack_exports__["a"] = (function( value ){
     return value*2;
 });
@@ -84,11 +84,11 @@
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__module__ = __webpack_require__(0);
-// es6/main.js
+// src/commonjs/es6/main.js
 
 
 const result = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__module__["a" /* default */])( 4 );
-console.log( 'Webpack:', result );
+console.log( 'ECMAScript 6 / CommonJS:', result );
 
 
 /***/ })

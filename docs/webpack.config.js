@@ -1,7 +1,7 @@
 // webpack.config.js
 module.exports = {
-    entry: './src/es6/main.js',
+    entry: './src/commonjs/es6/main.js',
     output: {
-        filename: 'assets/js/commonjs/bundle-webpack.js'
+        filename: 'assets/js/bundle-webpack-commonjs.js'
     }
 }

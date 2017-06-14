@@ -21,7 +21,7 @@
             <div class="jumbotron">
                 <h1>Javascript - ECMAScript 5</h1>
                 <h3>Javascript Module Systems</h3>
-                <p></p>
+                <p>Especificaciones para encapsular piezas de código exportables como módulos en Javascript</p>
                 <ul>
                     <li><a href="#commonjs">CommonJS</a></li>
                     <li><a href="#amd">AMD: Asynchronous Module Definition</a></li>
@@ -44,29 +44,29 @@
                     <div class="row">
                         <div class="col md-6 col-sm-6">
                             <h3>ECMAScript 5</h3>
-                            <code>// es5/module.js
+                            <code>// src/commonjs/es5/module.js
 module.exports = function( value ){
     return value*2;
 }</code>
                             <hr>
-                            <code>// es5/main.js
+                            <code>// src/commonjs/es5/main.js
 var multiplyBy2 = require('./module');
 
 var result = multiplyBy2( 4 );
-console.log(result);</code>
+console.log('ECMAScript 5 / CommonJS:', result);</code>
                         </div>
                         <div class="col md-6 col-sm-6">
                             <h3>ECMAScript 6</h3>
-                            <code>// es6/module.js
+                            <code>// src/commonjs/es6/module.js
 export default function( value ){
     return value*2;
 }</code>
                             <hr>
-                            <code>// es6/main.js
+                            <code>// src/commonjs/es6/main.js
 import multiplyBy2 from './module';
 
 const result = multiplyBy2( 4 );
-console.log( result );</code>
+console.log('ECMAScript 6 / CommonJS:', result);</code>
                         </div>
                     </div>
                     <hr>
@@ -83,15 +83,15 @@ console.log( result );</code>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col md-6 col-sm-6">
+                                <div class="col md-4 col-sm-4">
                                     <p><b>Ejecutar código:</b></p>
-                                    <code>node src/es5/main.js</code>
+                                    <code>node src/commonjs/es5/main.js</code>
                                     <p><b>Salida:</b></p>
                                     <code>ECMAScript 5: 8</code>
                                 </div>
-                                <div class="col md-4 col-sm-4">
+                                <div class="col md-8 col-sm-8">
                                     <p><b>Ejecutar código:</b></p>
-                                    <code>node src/es6/main.js</code>
+                                    <code>node src/commonjs/es6/main.js</code>
                                     <p><b>Salida:</b></p>
                                     <code>src\es6\main.js:2
 import multiplyBy2 from './module';
@@ -124,7 +124,7 @@ SyntaxError: Unexpected token import
                                     <p><b>Instalación</b></p>
                                     <code>npm install -g browserify</code>
                                     <p><b>Generar bundle</b></p>
-                                    <code>browserify src/es5/main.js > assets/js/commonjs/bundle-browserify.js</code>
+                                    <code>browserify src/commonjs/es5/main.js -o assets/js/bundle-browserify-commonjs.js</code>
                                 </div>
                                 <div class="col md-6 col-sm-6">
                                     <ul>
@@ -135,9 +135,9 @@ SyntaxError: Unexpected token import
                                     <p><b>Configuración:</b></p>
                                     <code>// webpack.config.js
 module.exports = {
-    entry: './src/es6/main.js',
+    entry: './src/commonjs/es6/main.js',
     output: {
-        filename: 'assets/js/commonjs/bundle-webpack.js'
+        filename: 'assets/js/bundle-webpack-commonjs.js'
     }
 }</code>
                                     <p><b>Generar bundle:</b></p>
@@ -147,9 +147,9 @@ module.exports = {
 Version: webpack 2.6.1
 Time: 91ms
                                Asset     Size  Chunks             Chunk Names
-assets/js/commonjs/bundle-webpack.js  3.23 kB       0  [emitted]  main
-   [0] ./src/es6/module.js 77 bytes {0} [built]
-   [1] ./src/es6/main.js 125 bytes {0} [built]</code>
+assets/js/bundle-webpack-commonjs.js  3.23 kB       0  [emitted]  main
+   [0] ./src/commonjs/es6/module.js 77 bytes {0} [built]
+   [1] ./src/commonjs/es6/main.js 125 bytes {0} [built]</code>
                                 </div>
                             </div>
                         </div>
@@ -164,15 +164,58 @@ assets/js/commonjs/bundle-webpack.js  3.23 kB       0  [emitted]  main
                     <div class="row">
                         <div class="col md-12 col-sm-12">
                             <ul>
+                                <li>Es un fork de CommonJS</li>
                                 <li>Es Asíncrono</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col md-4 col-sm-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Client side:</h3>
                         </div>
-                        <div class="col md-8 col-sm-8">
-                            <code></code>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col md-12 col-sm-12">
+                                    <p><b>Instalación de <a href="http://requirejs.org/" title="RequireJS" target="_blank">RequireJS:</a></b></p>
+                                    <p>Agregar referencia del script al HTML.</p>
+                                    <code>&lt;script data-main=&quot;src/amd/es5/main&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js&quot;&gt;&lt;/script&gt;</code>
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col md-12 col-sm-12">
+                                    <p>Crear el archivo inicial que cargará RequireJS</p>
+                                    <code>// src/amd/es5/main.js
+requirejs(["multiplyBy2", "sumFour"], function(multiplyBy2, sumFour) {
+    var result1 = multiplyBy2( 4 );
+    console.log( 'ECMAScript 5 / AMD:', result1 );
+    var result2 = sumFour( 3 );
+    console.log( 'ECMAScript 5 / AMD:', result2 );
+});</code>
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col md-12 col-sm-12">
+                                    <p>Crear los archivos que cargará main.js</p>
+                                </div>
+                                <div class="col md-6 col-sm-6">
+                                    <code>// src/amd/es5/multiplyBy2.js
+define(function (require, exports, module) {
+    module.exports = function( value ){
+        return value*2;
+    }
+});</code>
+                                </div>
+                                <div class="col md-6 col-sm-6">
+                                    <code>// src/amd/es5/sumFour.js
+define(function() {
+    return function( value ) {
+        return value + 4;
+    }
+});</code>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -187,15 +230,19 @@ assets/js/commonjs/bundle-webpack.js  3.23 kB       0  [emitted]  main
                             <ul>
                                 <li><a href="https://auth0.com/blog/javascript-module-systems-showdown/" title="JavaScript Module Systems Showdown: CommonJS vs AMD vs ES2015" target="_blank">JavaScript Module Systems Showdown: CommonJS vs AMD vs ES2015</a></li>
                                 <li><a href="http://wiki.commonjs.org/wiki/CommonJS" title="CommonJS Wiki" target="_blank">CommonJS Wiki</a></li>
-                                <li><a href="" title="" target="_blank"></a></li>
+                                <li><a href="http://ifandelse.com/its-not-hard-making-your-library-support-amd-and-commonjs/" title="It's Not Hard: Making Your Library Support AMD and CommonJS" target="_blank">It's Not Hard: Making Your Library Support AMD and CommonJS</a></li>
+                                <li><a href="http://requirejs.org/docs/whyamd.html" title="RequireJS: WHY AMD?" target="_blank">RequireJS: WHY AMD?</a></li>
+                                <li><a href="https://benmccormick.org/2015/05/28/moving-past-requirejs/" title="Moving Past RequireJS" target="_blank">Moving Past RequireJS</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <script src="assets/js/commonjs/bundle-webpack.js"></script>
-        <script src="assets/js/commonjs/bundle-browserify.js"></script>
+        <!-- Bundled scripts -->
+        <script src="assets/js/bundle-webpack-commonjs.js"></script>
+        <script src="assets/js/bundle-browserify-commonjs.js"></script>
+        <!-- Require.js -->
+        <script data-main="src/amd/es5/main" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
     </body>
 </html>
