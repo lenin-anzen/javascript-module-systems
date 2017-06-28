@@ -133,7 +133,7 @@ SyntaxError: Unexpected token import
                                     <p><b>Instalación</b></p>
                                     <code>npm install -g browserify</code>
                                     <p><b>Generar bundle</b></p>
-                                    <code>browserify src/commonjs/es5/main.js -o assets/js/bundle-browserify-commonjs.js</code>
+                                    <code>browserify src/commonjs/es5/main.js -o assets/js/bundle-browserify-commonjs.min.js</code>
                                 </div>
                                 <div class="col md-6 col-sm-6">
                                     <ul>
@@ -250,8 +250,8 @@ define(function() {
         </div>
 
         <!-- Bundled scripts -->
-        <script src="assets/js/bundle-webpack-commonjs.js"></script>
-        <script src="assets/js/bundle-browserify-commonjs.js"></script>
+        <script src="assets/js/bundle-webpack-commonjs.min.js"></script>
+        <script src="assets/js/bundle-browserify-commonjs.min.js"></script>
         <!-- Require.js -->
         <script data-main="src/amd/es5/main" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
     </body>

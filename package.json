@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/lenin-anzen/javascript-module-systems/issues"
   },
-  "homepage": "https://github.com/lenin-anzen/javascript-module-systems#readme"
+  "homepage": "https://github.com/lenin-anzen/javascript-module-systems#readme",
+  "devDependencies": {
+    "eslint": "^4.1.1",
+    "eslint-config-google": "^0.8.0"
+  }
 }
